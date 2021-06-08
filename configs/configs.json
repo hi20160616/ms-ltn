@@ -1,0 +1,13 @@
+{
+  "dbpath":"db",
+  "microservice":{
+    "title":"ltn",
+    "domain":"ltn.com.tw",
+    "url":[
+      "https://news.ltn.com.tw/list/breakingnews/world"
+    ],
+    "addr":":10005",
+    "timeout":"1s",
+    "heartbeat":"5m"
+  }
+}

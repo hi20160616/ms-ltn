@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "github.com/hi20160616/fetchnews-api/proto/v1/fetchnews.proto";
+
+option go_package = "github.com/hi20160616/ms-ltn/api/fetchnews/ltn/v1";
+
+package fetchnews.ltn.v1;
+
+service FetchZaobao{
+  rpc ListArticles(fetchnews.v1.ListArticlesRequest) returns (fetchnews.v1.ListArticlesResponse){ }
+  rpc GetArticle(fetchnews.v1.GetArticleRequest) returns (fetchnews.v1.Article){ }
+  rpc SearchArticles(fetchnews.v1.SearchArticlesRequest) returns (fetchnews.v1.SearchArticlesResponse){ }
+}
