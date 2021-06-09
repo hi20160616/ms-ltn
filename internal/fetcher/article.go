@@ -13,6 +13,7 @@ import (
 	"github.com/hi20160616/exhtml"
 	"github.com/hi20160616/gears"
 	"github.com/hi20160616/ms-ltn/configs"
+	"github.com/hycka/gocc"
 	"github.com/pkg/errors"
 	"golang.org/x/net/html"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -100,6 +101,17 @@ func (a *Article) Search(keyword ...string) ([]*Article, error) {
 
 // fetchArticle fetch article by rawurl
 func (a *Article) fetchArticle(rawurl string) (*Article, error) {
+	translate := func(x string, err error) (string, error) {
+		if err != nil {
+			return "", err
+		}
+		tw2s, err := gocc.New("tw2s")
+		if err != nil {
+			return "", err
+		}
+		return tw2s.Convert(x)
+	}
+
 	var err error
 	a.U, err = url.Parse(rawurl)
 	if err != nil {
@@ -113,7 +125,7 @@ func (a *Article) fetchArticle(rawurl string) (*Article, error) {
 
 	a.Id = fmt.Sprintf("%x", md5.Sum([]byte(rawurl)))
 
-	a.Title, err = a.fetchTitle()
+	a.Title, err = translate(a.fetchTitle())
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +141,7 @@ func (a *Article) fetchArticle(rawurl string) (*Article, error) {
 	}
 
 	// content should be the last step to fetch
-	a.Content, err = a.fetchContent()
+	a.Content, err = translate(a.fetchContent())
 	if err != nil {
 		return nil, err
 	}
