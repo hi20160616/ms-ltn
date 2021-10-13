@@ -1,13 +1,6 @@
 {
-  "dbpath":"db",
-  "microservice":{
-    "title":"ltn",
-    "domain":"ltn.com.tw",
-    "url":[
-      "https://news.ltn.com.tw/list/breakingnews/world"
-    ],
-    "addr":":10005",
-    "timeout":"1s",
-    "heartbeat":"5m"
-  }
+  "debug":false,
+  "verbose":false,
+  "gist": "https://gist.githubusercontent.com/hi20160616/bfcb9f8521d17aa4f65cf14b79550e23/raw/configs1.json",
+  "dbpath":"db"
 }

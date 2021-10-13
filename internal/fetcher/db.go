@@ -14,17 +14,17 @@ import (
 var dbfile = filepath.Join(configs.Data.RootPath, configs.Data.DBPath, "articles.json")
 
 func storage(as []*Article) error {
-	defer log.Printf("[%s] Storage Done.", configs.Data.MS.Title)
-	log.Printf("[%s] Storage ...", configs.Data.MS.Title)
+	defer log.Printf("[%s] Storage Done.", configs.Data.MS["ltn"].Title)
+	log.Printf("[%s] Storage ...", configs.Data.MS["ltn"].Title)
 	data, err := json.Marshal(as)
 	if err != nil {
 		return errors.WithMessagef(err, "[%s] storage marshal error:",
-			configs.Data.MS.Title)
+			configs.Data.MS["ltn"].Title)
 	}
 	gears.MakeDirAll(filepath.Join(configs.Data.RootPath, configs.Data.DBPath))
 	if err := os.WriteFile(dbfile, data, 0755); err != nil {
 		return errors.WithMessagef(err, "[%s] storage WriteFile error:",
-			configs.Data.MS.Title)
+			configs.Data.MS["ltn"].Title)
 	}
 	return nil
 }
